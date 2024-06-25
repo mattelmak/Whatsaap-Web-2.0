@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Web</title>
+    <link rel="stylesheet" href="light-mode.css" id="theme-link">
+</head>
+<body>
+    <h1 class="title">
+        <ion-icon name="logo-whatsapp" style="font-size: 30px;"></ion-icon>
+        <span style="position:relative; bottom: 5px;">WhatsApp Web 2.0</span>
+    </h1>
+    <div class="conteneur">
+        <div class="sidebar">
+            <div class="header">
+                <div class="image-profil">
+                    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="image de profil" class="cover-profil">
+                </div>
+                <ul class="menu">
+                    <li><ion-icon name="scan-circle-outline"></ion-icon></li>
+                    <li><ion-icon name="chatbox"></ion-icon></li>
+                    <li>
+                        <ion-icon name="ellipsis-vertical" id="sidebar-menu-toggle"></ion-icon>
+                        <div class="sidebar-menu" id="sidebar-menu">
+                            <ul>
+                                <li>Nouveau groupe</li>
+                                <li>Nouvelle communauté</li>
+                                <li>Message favori</li>
+                                <li>Selectionner les discussions</li>
+                                <li>Reglages</li>
+                                <li id="toggle-dark-mode">Mode Clair / Sombre</li>
+                                <li>Deconnexion</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="recherche">
+                <input type="text" placeholder="Rechercher ou demarrer une discussion">
+                <ion-icon name="search-outline"></ion-icon>
+            </div>
+            <div class="liste-contacts">
+                <div class="contact actif non-lu">
+                    <div class="contact-photo">
+                        <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="image de profil" class="cover-profil">
+                    </div>
+                    <div class="contact-message">
+                        <div class="nom-heure">
+                            <h4 class="nom">Contact 1</h4>
+                            <p class="heure"></p>
+                        </div>
+                        <div class="dernier-message">
+                            <p></p>
+                            <b>1</b>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="chat">
+            <div class="header">
+                <div class="profil-contact">
+                    <div class="image-profil">
+                        <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="image de profil" class="cover-profil">
+                    </div>
+                    <h3 class="nom">Contact 1<br><span>En ligne</span></h3>
+                </div>
+                <ul class="menu">
+                    <li><ion-icon name="videocam-outline"></ion-icon></li>
+                    <li><ion-icon name="call-outline"></ion-icon></li>
+                    <li><ion-icon name="search-outline"></ion-icon></li>
+                    <li>
+                        <ion-icon name="ellipsis-vertical" id="chat-menu-toggle"></ion-icon>
+                        <div class="chat-menu" id="chat-menu">
+                            <ul>
+                                <li>Information contact</li>
+                                <li>Selectionner les messages</li>
+                                <li>Fermer la discussion</li>
+                                <li>Effacer la discussion</li>
+                                <li>Supprimer la discussion</li>
+                                <li>Bloquer le contact</li>
+                            </ul>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="chat-body" id="chat-body">
+                <div>
+                    <div class="message recu">
+                    </div>
+                    <div class="message envoye">
+                    </div>
+                </div>
+            </div>
+            <div class="chat-footer">
+                <ion-icon name="happy-outline"></ion-icon>
+                <ion-icon name="attach-outline"></ion-icon>
+                <input type="text" placeholder="Taper un message" id="message-input">
+                <ion-icon name="mic" id="mic-button"></ion-icon>
+                <ion-icon name="send" id="send-button" style="display: none;"></ion-icon>
+            </div>
+        </div>
+    </div>
+    <script src="scripts.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
