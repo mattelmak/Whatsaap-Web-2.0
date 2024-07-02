@@ -1,0 +1,652 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap');
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Open Sans', sans-serif;
+}
+
+:root {
+    --primColor: #009688;
+    --secColor: #d9dbd5;
+    --bgColor1: #fff;
+    --bgColor2: #ededed;
+    --txtColor0: #fff;
+    --txtColor1: #000;
+    --txtColor2: #7f7f7f;
+    --inputColor: #7f7f7f;
+    --bgChat: #e5ddd5;
+    --bgSearch: #f6f6f6;
+    --bgSearchInput: #fff;
+    --bgContactActif: #ebebeb;
+    --bgContactHover: #f5f5f5;
+    --bgMessageP: #dcf8c6;
+    --bgRecuP: #e5e5ea;
+    --accentColor: #06d706;
+    --headerColor: #004d40;
+    --darkBgColor1: #111b21;
+    --darkBgColor2: #202c33;
+    --darkTxtColor1: #e5e5e5;
+    --darkTxtColor2: #75848d;
+    --darkInputColor: #75848d;
+    --darkBgChat: #0b141a;
+    --darkBgSearch: #2a3942;
+    --bgFooter: #f0f0f0;
+    --bgMenuLi: #f0f0f0;
+}
+
+body.dark-mode {
+    --primColor: #004d40;
+    --secColor: #0f181e;
+    --bgColor1: #111b21;
+    --bgColor2: #202c33;
+    --txtColor0: #fff;
+    --txtColor1: #fff;
+    --txtColor2: #75848d;
+    --inputColor: #75848d;
+    --bgChat: #0b141a;
+    --bgSearch: #202c33;
+    --bgSearchInput: #2a3942;
+    --bgContactActif: #233138;
+    --bgContactHover: #2a3942;
+    --bgMessageP: #005c4b;
+    --bgRecuP: #2a3942;
+    --accentColor: #06d706;
+    --headerColor: #004d40;
+    --bgFooter: #202c33;
+    --bgMenuLi: #2a3942;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(var(--primColor) 0%, var(--primColor) 130px, var(--secColor) 130px, var(--secColor) 100%);
+}
+
+.title {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    color: var(--txtColor0);
+    font-size: 20px;
+}
+
+.conteneur {
+    position: relative;
+    width: 1396px;
+    max-width: 100%;
+    margin-top: 40px;
+    height: calc(100vh - 60px);
+    background: var(--bgColor1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    overflow: hidden;
+}
+
+.conteneur .sidebar {
+    position: relative;
+    width: 30%;
+    background: var(--bgColor1);
+    border-right: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.conteneur .chat {
+    position: relative;
+    width: 70%;
+    background: var(--bgChat);
+}
+
+.conteneur .chat::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url(Images/pattern.png);
+    opacity: 0.06;
+}
+
+.dark-mode .conteneur .chat::before {
+    filter: invert(100%);
+}
+
+.header {
+    position: relative;
+    width: 100%;
+    height: 60px;
+    background: var(--bgColor2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 15px;
+}
+
+.image-profil {
+    position: relative;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+.cover-profil {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.menu {
+    display: flex;
+}
+
+.menu li {
+    display: flex;
+    list-style: none;
+    cursor: pointer;
+    opacity: 0.7;
+    font-size: 1.5em;
+    margin-left: 22px;
+    color: var(--txtColor1);
+}
+
+.menu li:hover {
+    opacity: 1;
+}
+
+.recherche {
+    position: relative;
+    width: 100%;
+    height: 50px;
+    background: var(--bgSearch);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 15px;
+}
+
+.recherche input {
+    width: 100%;
+    height: 38px;
+    outline: none;
+    border: none;
+    background: var(--bgSearchInput);
+    padding: 6px;
+    font-size: 14px;
+    border-radius: 30px;
+    padding-left: 40px;
+    color: var(--txtColor1);
+}
+
+.recherche input::placeholder {
+    color: var(--inputColor);
+}
+
+.recherche ion-icon {
+    position: absolute;
+    left: 30px;
+    top: 14px;
+    font-size: 1.2em;
+    color: var(--inputColor);
+}
+
+.liste-contacts {
+    position: relative;
+    height: calc(100% - 110px);
+    overflow-y: auto;
+    background: var(--bgColor1);
+}
+
+.liste-contacts .contact {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.liste-contacts .contact.actif {
+    background: var(--bgContactActif);
+}
+
+.liste-contacts .contact:hover {
+    background: var(--bgContactHover);
+    cursor: pointer;
+}
+
+.liste-contacts .contact:last-child {
+    border-bottom: 0;
+}
+
+.liste-contacts .contact .contact-photo {
+    position: relative;
+    min-width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.liste-contacts .contact .contact-photo img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.liste-contacts .contact .contact-message {
+    position: relative;
+    width: 100%;
+}
+
+.liste-contacts .contact .contact-message .nom-heure {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.liste-contacts .contact .contact-message .nom-heure .nom {
+    font-size: 1.1em;
+    font-weight: 600;
+    color: var(--txtColor1);
+}
+
+.liste-contacts .contact .contact-message .nom-heure .heure {
+    font-size: 0.75em;
+    color: var(--txtColor2);
+}
+
+.liste-contacts .contact.non-lu .contact-message .nom-heure .heure {
+    color: var(--accentColor);
+}
+
+.liste-contacts .contact .contact-message .dernier-message {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.liste-contacts .contact .contact-message .dernier-message p {
+    font-size: 0.9em;
+    color: var(--txtColor2);
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+}
+
+.liste-contacts .contact .contact-message .dernier-message b {
+    background: var(--accentColor);
+    color: var(--txtColor1);
+    min-width: 20px;
+    height: 20px;
+    font-size: 0.75em;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+}
+
+.profil-contact {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.profil-contact .image-profil {
+    position: relative;
+    min-width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 10px;
+    margin-left: 0px;
+}
+
+.profil-contact .image-profil img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profil-contact .nom {
+    font-size: 1.1em;
+    line-height: 1.0em;
+    font-weight: 600;
+    margin-left: 10px;
+    color: var(--txtColor1);
+}
+
+.profil-contact .nom span {
+    font-size: 0.75em;
+    font-weight: 400;
+    color: var(--txtColor2);
+}
+
+.chat-body {
+    position: relative;
+    height: calc(100% - 140px);
+    padding: 50px;
+    overflow-y: auto;
+}
+
+.message {
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    width: 100%;
+    margin: 5px 0;
+}
+
+.message p {
+    position: relative;
+    right: 0;
+    text-align: right;
+    max-width: 65%;
+    padding: 12px;
+    background: var(--bgMessageP);
+    border-radius: 10px;
+    font-size: 0.9em;
+    color: var(--txtColor1);
+}
+
+.message p::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: -12px;
+    width: 20px;
+    height: 20px;
+    background: linear-gradient(135deg, var(--bgMessageP) 0%, var(--bgMessageP) 50%, transparent 50%, transparent 100%);
+}
+
+.message p span {
+    display: block;
+    margin-top: 5px;
+    font-size: 0.85em;
+    opacity: 0.5;
+}
+
+.envoye {
+    justify-content: flex-end;
+}
+
+.recu {
+    justify-content: flex-start;
+}
+
+.recu p {
+    background: var(--bgRecuP);
+    text-align: left;
+}
+
+.recu p::before {
+    left: -12px;
+    background: linear-gradient(225deg, var(--bgRecuP) 0%, var(--bgRecuP) 50%, transparent 50%, transparent 100%);
+}
+
+.chat-footer {
+    position: relative;
+    height: 80px;
+    padding: 15px 15px 15px 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: var(--bgFooter);
+}
+
+.chat-footer ion-icon {
+    cursor: pointer;
+    font-size: 1.8em;
+    opacity: 0.7;
+    color: var(--txtColor1);
+}
+
+.chat-footer ion-icon:hover {
+    opacity: 1;
+}
+
+.chat-footer ion-icon:nth-child(1) {
+    margin: 0 15px;
+}
+
+.chat-footer input {
+    position: relative;
+    width: 90%;
+    margin: 0 15px;
+    padding: 10px 20px;
+    border: none;
+    outline: none;
+    font-size: 1em;
+    border-radius: 30px;
+    color: var(--txtColor1);
+    background: var(--bgSearchInput);
+}
+
+.chat-footer input::placeholder {
+    color: var(--inputColor);
+}
+
+.sidebar-menu, .chat-menu {
+    display: none;
+    position: absolute;
+    background: var(--bgColor1);
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 10;
+    right: 10px;
+    top: 40px;
+    padding: 10px;
+    list-style: none;
+    font-size: 10px;
+    color: var(--txtColor1);
+}
+
+.sidebar-menu.visible, .chat-menu.visible {
+    display: block;
+}
+
+.sidebar-menu ul, .chat-menu ul {
+    padding: 0;
+}
+
+.sidebar-menu li, .chat-menu li {
+    padding: 10px;
+    cursor: pointer;
+}
+
+.sidebar-menu li:hover, .chat-menu li:hover {
+    background-color: var(--bgMenuLi);
+    color: var(--txtColor1);
+}
+
+/* Profile */
+.height {
+    height: 110px;
+}
+
+.dark-mode .section-title {
+    color: var(--txtColor0);
+}
+
+.section-title ion-icon {
+    position: relative;
+    margin-right: 15px;
+    top: 4px;
+    cursor: pointer;
+}
+
+.profile-pic {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.profile-pic input {
+    display: none;
+}
+
+.profile-pic .image {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-top: 40px;
+}
+
+.profile-pic .cover {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    cursor: pointer;
+}
+
+.profile-pic .cover:hover {
+    opacity: 0.7;
+}
+
+.profile .info-profile {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: space-between;
+    text-align: left;
+    padding: 20px;
+    margin-top: 20px;
+    color: var(--txtColor1);
+}
+
+.profile .info-profile input {
+    height: 20px;
+    border: none;
+    outline: none;
+    background-color: transparent;
+    color: var(--txtColor1);
+}
+
+.profile .info-profile ion-icon {
+    position: relative;
+    left: 95%;
+    bottom: 25px;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
+.profile .info-profile .char-count-nom,
+.profile .info-profile .char-count-infos {
+    position: relative;
+    top: 10px;
+    left: 0;
+    text-align: right;
+    font-size: 0.75em;
+    opacity: 0.5;
+}
+
+/* Statuts */
+.statuts {
+    background-color: var(--bgColor1);
+}
+
+.statuts .section-title {
+    color: var(--txtColor1);
+}
+
+.statuts hr {
+    opacity: 0.3;
+}
+
+.statuts .mon-statut,
+.statuts .statut-recent {
+    font-weight: normal;
+    font-size: 0.75em;
+    padding: 20px 0;
+    color: var(--headerColor);
+}
+
+.statuts .mon-statut h3,
+.statuts .statut-recent h3 {
+    margin: 20px;
+}
+
+.statut-item {
+    position: relative;
+    overflow-y: auto;
+    background: var(--bgColor1);
+}
+
+.statut-item .statut-miniature,
+.nouveau-message .statut-miniature {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 15px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.statut-recent .statut-item .statut-miniature.non-vu .miniature {
+    border: 2px solid #06d706;
+}
+
+.statut-recent .statut-item .statut-miniature:hover {
+    background: var(--bgContactHover);
+    cursor: pointer;
+}
+
+.statut-item .statut-miniature:last-child {
+    border-bottom: 0;
+}
+
+.statut-item .statut-miniature .miniature {
+    position: relative;
+    min-width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-right: 15px;
+}
+
+.statut-item .statut-miniature .miniature img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.statut-item .statut-miniature .statut-message {
+    color: var(--txtColor1);
+}
+
+/* Nouveau message */
+.nouveau-message p {
+    font-size: 0.75em;
+}
+

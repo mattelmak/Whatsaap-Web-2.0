@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WhatsApp Web - Enregistrement</title>
+    <link rel="stylesheet" href="auth-styles.css">
+</head>
+<body>
+    <h1 class="title">
+        <ion-icon name="logo-whatsapp" style="font-size: 30px;"></ion-icon>
+        <span style="position:relative; bottom: 5px;">WhatsApp Web 2.0</span>
+    </h1>
+    <div class="conteneur">
+        <div class="form-container">
+            <form id="registerForm">
+                <h1>Créer un compte</h1>
+                <div class="profile-pic">
+                    <div class="image">
+                        <label for="profileImage">
+                            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="image de profil" class="cover" id="coverImage">
+                        </label>
+                        <input type="file" id="profileImage" accept="image/jpg, image/jpeg, image/png" required>
+                    </div>
+                    <ion-icon name="add-circle-sharp" onclick="changeCover()"></ion-icon>
+                </div>
+                <input type="text" placeholder="Nom d'utilisateur" id="registerUsername" required>
+                <input type="tel" placeholder="Numéro de téléphone" id="registerPhone" required>
+                <input type="password" placeholder="Mot de passe" id="registerPassword" required>
+                <input type="password" placeholder="Confirmer mot de passe" id="registerConfirmPassword" required>
+                <button type="submit">S'enregistrer</button>
+                <p>Vous avez déjà un compte ? <a href="index.html">Se connecter</a></p>
+            </form>
+        </div>
+    </div>
+    <script src="auth.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

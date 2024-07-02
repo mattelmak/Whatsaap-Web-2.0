@@ -1,23 +1,43 @@
 document.addEventListener('DOMContentLoaded', function () {
-    const themeLink = document.getElementById('theme-link');
-    const toggleDarkModeButtons = document.querySelectorAll('#toggle-dark-mode, #toggle-dark-mode-chat');
+    const toggleDarkModeButton = document.querySelectorAll('#toggle-dark-mode, #toggle-dark-mode-chat');
     const messageInput = document.getElementById('message-input');
     const sendButton = document.getElementById('send-button');
     const micButton = document.getElementById('mic-button');
     const chatBody = document.getElementById('chat-body');
+    const deconnecterButton = document.getElementById('deconnexion');
+    const sidebarMenuToggle = document.getElementById('sidebar-menu-toggle');
+    const chatMenuToggle = document.getElementById('chat-menu-toggle');
+    const profileImage = document.getElementById('myProfileImage');
+    const openProfileIcon = document.getElementById('myProfileImageChat');
+    const openStatusIcon = document.getElementById('open-status');
+    const openMessageIcon = document.getElementById('open-message');
+    const retourProfileIcon = document.getElementById('retour-profile');
+    const retourStatusIcon = document.getElementById('retour-status');
+    const retourMessageIcon = document.getElementById('retour-message');
+    const penNomButton = document.getElementById('penNom');
+    const checkNomButton = document.getElementById('checkNom');
+    const penInfosButton = document.getElementById('penInfos');
+    const checkInfosButton = document.getElementById('checkInfos');
+    const usernameInput = document.getElementById('username');
+    const infosInput = document.getElementById('infos');
+    const profileImageInput = document.getElementById('profileImageInput');
+    const myProfileImageContacts = document.getElementById('myProfileImageContacts');
+    const myProfileImageInput = document.getElementById('myProfileImageInput');
+    const myProfileImageNewMessage = document.getElementById('myProfileImageNewMessage');
 
-    // Toggle dark mode
-    toggleDarkModeButtons.forEach(button => {
+    // Activer / désactiver dark mode
+    toggleDarkModeButton.forEach(button => {
         button.addEventListener('click', function () {
-            if (themeLink.getAttribute('href') === 'light-mode.css') {
-                themeLink.setAttribute('href', 'dark-mode.css');
-            } else {
-                themeLink.setAttribute('href', 'light-mode.css');
-            }
+            document.body.classList.toggle('dark-mode');
         });
     });
 
-    // Send message on button click
+    // Deconnexion
+    deconnecterButton.addEventListener('click', function () {
+        window.location.href = 'index.html';
+    });
+
+    // Envoie message par click
     sendButton.addEventListener('click', function () {
         const messageText = messageInput.value;
         if (messageText.trim() !== '') {
@@ -30,14 +50,14 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Send message on Enter key press
+    // Envoie message par entrer
     messageInput.addEventListener('keypress', function (event) {
         if (event.key === 'Enter') {
             sendButton.click();
         }
     });
 
-    // Toggle mic/send button
+    // Permuter bouton micro / envoyer
     messageInput.addEventListener('input', function () {
         toggleMicSendButton();
     });
@@ -52,7 +72,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Create a message element
+    // Creer un message
     function createMessageElement(text, type) {
         const messageElement = document.createElement('div');
         messageElement.classList.add('message', type);
@@ -60,13 +80,13 @@ document.addEventListener('DOMContentLoaded', function () {
         return messageElement;
     }
 
-    // Get current time in HH:MM format
+    // Obtenir l'heure actuelle
     function getCurrentTime() {
         const now = new Date();
         return now.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     }
 
-    // Update last message in sidebar
+    // Mettre à jour le dernier message dans le sidebar
     function updateLastMessage(contactName, messageText, time) {
         const contactElement = Array.from(document.querySelectorAll('.contact')).find(contact => 
             contact.querySelector('.nom').textContent.trim() === contactName
@@ -79,25 +99,25 @@ document.addEventListener('DOMContentLoaded', function () {
             lastMessageElement.textContent = messageText;
             timeElement.textContent = time;
 
-            // Mark as read
-            timeElement.style.color = '#7f7f7f';
+            // Marquer comme lu
+            timeElement.style.color = 'var(--txtColor2)';
             if (unreadBadge) {
                 unreadBadge.remove();
             }
         }
     }
 
-    // Sidebar menu toggle
-    document.getElementById('sidebar-menu-toggle').addEventListener('click', function () {
+    // Sidebar menu permutation
+    sidebarMenuToggle.addEventListener('click', function () {
         document.getElementById('sidebar-menu').classList.toggle('visible');
     });
 
-    // Chat menu toggle
-    document.getElementById('chat-menu-toggle').addEventListener('click', function () {
+    // Chat menu permutation
+    chatMenuToggle.addEventListener('click', function () {
         document.getElementById('chat-menu').classList.toggle('visible');
     });
 
-    // Hide menus when clicking outside
+    // Masquer le menu en cliquant en dehors
     document.addEventListener('click', function (event) {
         if (!event.target.closest('#sidebar-menu') && !event.target.closest('#sidebar-menu-toggle')) {
             document.getElementById('sidebar-menu').classList.remove('visible');
@@ -107,7 +127,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    // Display welcome message on page load
+    // Afficher le message de bienvenue
     function displayWelcomeMessage() {
         const hours = new Date().getHours();
         const isDayTime = hours >= 6 && hours < 18;
@@ -120,6 +140,153 @@ document.addEventListener('DOMContentLoaded', function () {
         messageElement.scrollIntoView({ behavior: 'smooth' });
     }
 
-    // Show welcome message on load
+    // Afficher le message de bienvenue au chargement
     displayWelcomeMessage();
+
+    // Profile Modification
+    profileImageInput.addEventListener('change', function () {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+            myProfileImageInput.src = e.target.result;
+            profileImage.src = e.target.result;
+            myProfileImageContacts.src = e.target.result;
+            openProfileIcon.src = e.target.result;
+            myProfileImageNewMessage.src = e.target.result;
+
+            let userData = JSON.parse(localStorage.getItem('userData')) || {};
+            userData.profileImage = e.target.result;
+            localStorage.setItem('userData', JSON.stringify(userData));
+        };
+        reader.readAsDataURL(this.files[0]);
+    });
+
+    usernameInput.addEventListener('input', function () {
+        let userData = JSON.parse(localStorage.getItem('userData')) || {};
+        userData.username = this.value;
+        document.querySelector('.contact-message .nom').textContent = this.value + ' (Moi)';
+        document.querySelector('.profil-contact .nom').textContent = this.value + ' (Moi)';
+        document.querySelector('.contact-infos .nom').textContent = this.value + ' (Moi)';
+        localStorage.setItem('userData', JSON.stringify(userData));
+        updateCharCount(usernameInput);
+    });
+
+    infosInput.addEventListener('input', function () {
+        let userData = JSON.parse(localStorage.getItem('userData')) || {};
+        userData.infos = this.value;
+        document.querySelector('.contact-infos .infos').textContent = this.value;
+        localStorage.setItem('userData', JSON.stringify(userData));
+        updateCharCount(infosInput);
+    });
+
+    // Ouvrir / fermer les onglets
+    openProfileIcon.addEventListener('click', openProfile);
+    profileImage.addEventListener('click', openProfile);
+    openStatusIcon.addEventListener('click', openStatus);
+    openMessageIcon.addEventListener('click', openMessage);
+    retourProfileIcon.addEventListener('click', retour);
+    retourStatusIcon.addEventListener('click', retour);
+    retourMessageIcon.addEventListener('click', retour);
+
+    function openProfile() {
+        document.querySelector('.contacts').style.display = 'none';
+        document.querySelector('.profile').style.display = 'block';
+    }
+
+    function openStatus() {
+        document.querySelector('.contacts').style.display = 'none';
+        document.querySelector('.statuts').style.display = 'block';
+    }
+
+    function openMessage() {
+        document.querySelector('.contacts').style.display = 'none';
+        document.querySelector('.nouveau-message').style.display = 'block';
+    }
+
+    function retour() {
+        const inputNom = document.getElementById('username');
+        inputNom.disabled = true;
+        const inputInfos = document.getElementById('infos');
+        inputInfos.disabled = true;
+        document.querySelector('.contacts').style.display = 'block';
+        document.querySelector('.profile').style.display = 'none';
+        document.querySelector('.statuts').style.display = 'none';
+        document.querySelector('.nouveau-message').style.display = 'none';
+        checkNomButton.style.display = 'none';
+        penNomButton.style.display = 'block';
+        checkInfosButton.style.display = 'none';
+        penInfosButton.style.display = 'block';
+        document.querySelector('.char-count-nom').style.display = 'none';
+        document.querySelector('.char-count-infos').style.display = 'none';
+    }
+
+    // Modifier Nom and Infos
+    penNomButton.addEventListener('click', function() {
+        modifierNom(usernameInput, penNomButton, checkNomButton);
+    });
+
+    checkNomButton.addEventListener('click', function() {
+        desactiverNom();
+    });
+
+    penInfosButton.addEventListener('click', function() {
+        modifierInfos(infosInput, penInfosButton, checkInfosButton);
+    });
+
+    checkInfosButton.addEventListener('click', function() {
+        desactiverInfos();
+    });
+
+    usernameInput.addEventListener('keydown', function(event) {
+        if (event.key === "Enter") {
+            desactiverNom();
+        }
+    });
+
+    infosInput.addEventListener('keydown', function(event) {
+        if (event.key === "Enter") {
+            desactiverInfos();
+        }
+    });
+
+    function modifierNom(inputElement, penButton, checkButton) {
+        inputElement.disabled = false;
+        inputElement.focus();
+        penButton.style.display = 'none';
+        checkButton.style.display = 'block';
+        document.querySelector('.char-count-nom').style.display = 'block';
+        updateCharCount(inputElement);
+    }
+
+    function desactiverNom() {
+        usernameInput.disabled = true;
+        checkNomButton.style.display = 'none';
+        penNomButton.style.display = 'block';
+        document.querySelector('.char-count-nom').style.display = 'none';
+    }
+
+    function modifierInfos(inputElement, penButton, checkButton) {
+        inputElement.disabled = false;
+        inputElement.focus();
+        penButton.style.display = 'none';
+        checkButton.style.display = 'block';
+        document.querySelector('.char-count-infos').style.display = 'block';
+        updateCharCount(inputElement);
+    }
+
+    function desactiverInfos() {
+        infosInput.disabled = true;
+        checkInfosButton.style.display = 'none';
+        penInfosButton.style.display = 'block';
+        document.querySelector('.char-count-infos').style.display = 'none';
+    }
+
+    // Mettre à jour le compteur de caractères
+    function updateCharCount(inputElement) {
+        const maxLength = inputElement.maxLength;
+        const currentLength = inputElement.value.length;
+        const charCountElement = inputElement.nextElementSibling;
+        if (charCountElement) {
+            charCountElement.textContent = `${currentLength} / ${maxLength}`;
+        }
+    }
 });
